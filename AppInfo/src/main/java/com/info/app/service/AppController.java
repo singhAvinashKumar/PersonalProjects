@@ -2,20 +2,52 @@ package com.info.app.service;
 
 import com.info.app.model.AppInfo;
 import com.info.app.model.AppRating;
+import com.info.app.model.AuthenticateRequest;
+import com.info.app.model.AuthenticateResponse;
+import com.info.app.security.MyUserDetailsService;
+import com.info.app.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
 @RestController
+@RefreshScope
 public class AppController {
 
     @Autowired
+    AuthenticationManager authenticationManager;
+    @Autowired
     private AppService info;
+    @Autowired
+    private MyUserDetailsService userDetailsService;
+    @Autowired
+    private JwtUtil jwtUtil;
+
+    @RequestMapping(method = RequestMethod.POST,value = "/authenticate")
+    public ResponseEntity<?> doAuthentication(@RequestBody AuthenticateRequest request) throws Exception {
+
+        try {
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+                    request.getUserName(),request.getPassword())
+            );
+        } catch (BadCredentialsException e){
+                throw new Exception("Bad Credentials",e);
+        }
+        UserDetails userDetails= userDetailsService.loadUserByUsername(request.getUserName());
+        final String jwt=jwtUtil.generateToken(userDetails);
+        System.out.println("what's JWT" + jwt);
+        return  ResponseEntity.ok(new AuthenticateResponse(jwt));
+    }
 
     @RequestMapping("/")
     public Iterable<AppInfo> getAllApps(){
-
         return info.getAllApps();
     }
 

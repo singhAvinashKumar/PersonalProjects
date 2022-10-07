@@ -1,27 +1,25 @@
 server:
   port: 8081
 spring:
- application:
-   name: AppInfo
- jpa:
-   hibernate:
-     ddl-auto: update
- datasource:
-   url: jdbc:mysql://localhost:3306/springbootdb
-   driver-class-name: com.mysql.cj.jdbc.Driver
-   username: springadmin
-   password: kravchenko
- cloud:
-   config:
-     uri: http://localhost:8888
-     enabled: false
+  application:
+    name: AppInfo
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:mysql://localhost:3306/springbootdb
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: springadmin
+    password: kravchenko
 
+  config:
+    import: optional:configserver:http://localhost:8888
 
 management:
   endpoints:
     web:
       exposure:
-        include: health
+        include: "*"
   health:
     circuitbreakers:
       enabled: 'true'
@@ -53,7 +51,7 @@ resilience4j:
   retry:
     instances:
       Catalog:
-        #registerHealthIndicator: true
+        registerHealthIndicator: true
         max-attempts: 5
         waitDuration: 10s
 
@@ -61,6 +59,4 @@ resilience4j:
 logging:
   level:
     org:
-      springframework: INFO
-
-
+      springframework: DEBUG

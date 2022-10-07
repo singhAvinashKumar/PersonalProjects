@@ -27,7 +27,7 @@ public class AppService {
         return  repo.findAll();
     }
 
-    public Iterable<AppInfo> getDefaultApps(){
+    public Iterable<AppInfo> getDefaultApps(RuntimeException e){
         List<AppInfo> list= new ArrayList<>();
         list.add(new AppInfo(0,"None","None"));
         return list;
@@ -51,7 +51,7 @@ public class AppService {
         }
 
 
-        return "User Don't exists";
+        return "App Don't exists";
     }
 
     public String rateApp(AppRating ratings){
