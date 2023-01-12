@@ -6,6 +6,8 @@ import com.info.app.model.AuthenticateRequest;
 import com.info.app.model.AuthenticateResponse;
 import com.info.app.security.MyUserDetailsService;
 import com.info.app.util.JwtUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +23,7 @@ import java.util.Optional;
 @RefreshScope
 public class AppController {
 
+    Logger logger = LoggerFactory.getLogger(AppController.class);
     @Autowired
     AuthenticationManager authenticationManager;
     @Autowired
@@ -87,6 +90,8 @@ public class AppController {
 
     @RequestMapping("/ratings")
     public Iterable<AppRating> getRatings(){
+        if (logger.isDebugEnabled())
+            logger.debug("Get ratings has been requested by " );
         return  info.getRatings();
     }
 

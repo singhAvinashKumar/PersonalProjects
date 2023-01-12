@@ -59,4 +59,8 @@ resilience4j:
 logging:
   level:
     org:
-      springframework: DEBUG
+      springframework: INFO
+
+    com:
+      info:
+        app: DEBUG

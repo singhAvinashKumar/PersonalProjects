@@ -28,4 +28,7 @@ public class UserService {
             return "User Removed";
     }
 
+    public void updateUser(UserInfo info) {
+
+    }
 }

@@ -5,7 +5,8 @@ import javax.persistence.Id;
 
 @Entity
 public class UserInfo   {
-    @Id
+    @
+            Id
     private int userId;
     private String userName;
 
@@ -20,7 +21,7 @@ public class UserInfo   {
     public String getUserName() {
         return userName;
     }
-
+    
     public void setUserName(String userName) {
         this.userName = userName;
     }
