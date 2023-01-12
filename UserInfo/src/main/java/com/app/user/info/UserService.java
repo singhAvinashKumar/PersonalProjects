@@ -29,6 +29,10 @@ public class UserService {
     }
 
     public void updateUser(UserInfo info) {
-
+            Optional<UserInfo> userInfo = repo.findById(info.getUserId());
+            userInfo.ifPresentOrElse(userInfo1 -> repo.save(info),
+                    ()->{
+                        throw new UserNotFoundException("User "+info.getUserId()+ " not present");
+                    });
     }
 }

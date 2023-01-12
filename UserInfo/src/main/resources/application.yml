@@ -8,7 +8,7 @@ spring:
       ddl-auto: update
   datasource:
     url: jdbc:mysql://localhost:3306/springbootdb
-    username: springadmin
+    username: Avinash
     password: kravchenko
     driver-class-name : com.mysql.cj.jdbc.Driver
 
@@ -57,5 +57,5 @@ resilience4j:
 logging:
   level:
     org:
-      springframework: DEBUG
+      springframework: INFO
 
