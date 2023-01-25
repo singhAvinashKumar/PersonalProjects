@@ -18,9 +18,12 @@ public class UserService {
         return repo.findById(userId);
     }
 
-    public String createUser(UserInfo user){
-            repo.save(user);
-            return "User Updated";
+    public Optional<UserInfo> getUserByEmail(String email){
+        return repo.findByEmail(email);
+    }
+    public boolean createUser(UserInfo user){
+         repo.save(user);
+         return true;
     }
 
     public String deleteUser(int userId){
