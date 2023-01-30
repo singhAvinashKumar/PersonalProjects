@@ -1,6 +1,5 @@
 package com.app.user.model.ResponseBody;
 
-import com.app.user.model.UserInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,19 +11,9 @@ public class CustomResponseBody {
     private UUID txId;
     private Date timeStamp;
     private UUID correlationId;
-    private Iterable<UserInfo> allUser;
-    private UserInfo body;
+    private Body body;
     private Status status;
 
-    public CustomResponseBody(UUID txId, Date timeStamp, UUID correlationId, Iterable<UserInfo> allUser, Status status, String operation) {
-        logger.info("Created CustomResponseBody : Inside allUser");
-        this.txId = txId;
-        this.timeStamp = timeStamp;
-        this.correlationId = correlationId;
-        this.allUser = allUser;
-        this.status = status;
-        this.operation = operation;
-    }
 
     public CustomResponseBody(UUID txId, Date timeStamp, UUID correlationId, Status status, String operation) {
         logger.info("Created CustomResponseBody : ");
@@ -35,7 +24,7 @@ public class CustomResponseBody {
         this.operation = operation;
     }
 
-    public CustomResponseBody(UUID txId, Date timeStamp, UUID correlationId, UserInfo body, Status status, String operation) {
+    public CustomResponseBody(UUID txId, Date timeStamp, UUID correlationId, Body body, Status status, String operation) {
         logger.info("Created CustomResponseBody : Inside body");
         this.txId = txId;
         this.timeStamp = timeStamp;
@@ -43,14 +32,6 @@ public class CustomResponseBody {
         this.body = body;
         this.status = status;
         this.operation = operation;
-    }
-
-    public Iterable<UserInfo> getAllUser() {
-        return allUser;
-    }
-
-    public void setAllUser(Iterable<UserInfo> allUser) {
-        this.allUser = allUser;
     }
 
     private String operation;
@@ -79,11 +60,11 @@ public class CustomResponseBody {
         this.correlationId = correlationId;
     }
 
-    public UserInfo getBody() {
+    public Body getBody() {
         return body;
     }
 
-    public void setBody(UserInfo body) {
+    public void setBody(Body body) {
         this.body = body;
     }
 

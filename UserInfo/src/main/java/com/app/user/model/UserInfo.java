@@ -3,6 +3,8 @@ package com.app.user.model;
 import org.springframework.context.annotation.Primary;
 
 import javax.persistence.*;
+import java.util.List;
+import java.util.Queue;
 
 @Entity
 public class UserInfo   {
@@ -21,6 +23,17 @@ public class UserInfo   {
 
     @Column(nullable = false)
     private String role;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<String> previousPassword;
+
+    public List<String> getPreviousPassword() {
+        return previousPassword;
+    }
+
+    public void setPreviousPassword(List<String> previousPassword) {
+        this.previousPassword = previousPassword;
+    }
 
     public String getEmail() {
         return email;
