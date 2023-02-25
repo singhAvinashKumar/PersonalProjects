@@ -21,7 +21,7 @@ public class Validator {
     // AlphaNumericPassword
     public boolean isValidPassword(String password){
         boolean result = Pattern.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+=])(?=\\S+$).{8,20}$",password);
-        logger.info(" "+result);
+        logger.info(" " + result);
         return result;
     }
 
