@@ -1,0 +1,56 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  health:
+    circuitbreakers:
+      enabled: 'true'
+  endpoint:
+    health:
+      show-details: always
+resilience4j:
+  circuitbreaker:
+    instances:
+      Catalog:
+        registerHealthIndicator: 'true'
+        slidingWindowSize: '10'
+        automaticTransitionFromOpenToHalfOpenEnabled: 'true'
+        eventConsumerBufferSize: '10'
+        waitDurationInOpenState: 5s
+        failureRateThreshold: '50'
+        slidingWindowType: COUNT_BASED
+        minimumNumberOfCalls: '5'
+        permittedNumberOfCallsInHalfOpenState: '3'
+  ratelimiter:
+    instances:
+      Catalog:
+        limitRefreshPeriod: 10s
+        timeoutDuration: 3s
+        limitForPeriod: '10'
+        registerHealthIndicator: 'false'
+
+
+  retry:
+    instances:
+      Catalog:
+        #registerHealthIndicator: true
+        max-attempts: 5
+        waitDuration: 10s
+spring:
+  application:
+    name: catalog-service
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    username: Avinash
+    password: kravchenko
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/springbootdb
+Server:
+  port: '8083'
+logging:
+  level:
+    org:
+      springframework: INFO

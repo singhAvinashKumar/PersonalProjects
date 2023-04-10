@@ -1,1 +1,21 @@
 
+spring:
+  application:
+    name: CentralizedSecurity
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  datasource:
+    url: jdbc:mysql://localhost:3306/springbootdb
+    username: Avinash
+    password: kravchenko
+    driver-class-name : com.mysql.cj.jdbc.Driver
+
+server:
+  port: 8085
+logging:
+  level:
+    org:
+      springframework: INFO
+

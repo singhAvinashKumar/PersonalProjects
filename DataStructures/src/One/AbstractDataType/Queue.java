@@ -1,6 +1,8 @@
 package One.AbstractDataType;
 
-public class Queue {
+public class
+
+Queue {
 
     int size;
     int[] elements;

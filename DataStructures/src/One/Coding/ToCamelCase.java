@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 public class ToCamelCase {
 
     public static void main(String[] args) {
-        String word = "A WondeRfull#new@worlD";
+        String word = "A WondweRfull#new@worlD";
         toCamelCaseUpper(word);
     }
 
@@ -20,7 +20,9 @@ public class ToCamelCase {
             String lowerCase = s.toLowerCase();
             char c = lowerCase.charAt(0);
             //result = result + lowerCase.toUpperCase();
-            result = result + lowerCase.replace(c, Character.toUpperCase(c));
+//            result = result + lowerCase.replace(lowerCase.charAt(0),Character.toUpperCase(c));
+            result = result + Character.toUpperCase(c) + lowerCase.substring(1) ;
+//            result = result + lowerCase.replace(c, Character.toUpperCase(c));
             System.out.println(result);
         }
         System.out.println(result);

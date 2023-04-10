@@ -1,0 +1,66 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: AppInfo
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:mysql://localhost:3306/springbootdb
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: Avinash
+    password: kravchenko
+
+  config:
+    import: optional:configserver:http://localhost:8888
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  health:
+    circuitbreakers:
+      enabled: 'true'
+  endpoint:
+    health:
+      show-details: always
+resilience4j:
+  circuitbreaker:
+    instances:
+      Catalog:
+        registerHealthIndicator: 'true'
+        slidingWindowSize: '10'
+        automaticTransitionFromOpenToHalfOpenEnabled: 'true'
+        eventConsumerBufferSize: '10'
+        waitDurationInOpenState: 5s
+        failureRateThreshold: '50'
+        slidingWindowType: COUNT_BASED
+        minimumNumberOfCalls: '5'
+        permittedNumberOfCallsInHalfOpenState: '3'
+  ratelimiter:
+    instances:
+      Catalog:
+        limitRefreshPeriod: 10s
+        timeoutDuration: 3s
+        limitForPeriod: '10'
+        registerHealthIndicator: 'false'
+
+
+  retry:
+    instances:
+      Catalog:
+        registerHealthIndicator: true
+        max-attempts: 5
+        waitDuration: 10s
+
+
+logging:
+  level:
+    org:
+      springframework: INFO
+
+    com:
+      appservice:
+        appInfo: DEBUG

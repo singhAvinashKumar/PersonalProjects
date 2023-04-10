@@ -76,20 +76,18 @@ public class AbstractTree {
         return current;
     }
     public Node min(Node root){
-        Node current = root;
-        if(current.getLeftChild() == null)
-            return   current;
+        if(root.getLeftChild() == null)
+            return root;
 
-        return min(current.getLeftChild());
+        return min(root.getLeftChild());
 
     }
 
     public Node max(Node root){
-        Node current = root;
-        if(current.getRightChild() == null)
-            return   current;
+        if(root.getRightChild() == null)
+            return root;
 
-        return max(current.getRightChild());
+        return max(root.getRightChild());
 
     }
 
